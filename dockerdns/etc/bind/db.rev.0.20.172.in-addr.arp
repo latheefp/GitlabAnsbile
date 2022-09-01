@@ -1,0 +1,14 @@
+$TTL 86400
+@           IN    SOA    riyadh.lan.  root.riyadh.lan. (
+          6       ; serial
+          28800   ; refresh
+          14400   ; retry
+          3600000 ; expire
+          86400   ; ttl
+          )
+
+@        IN    NS    ns. 
+2        IN    PTR   ns.riyadh.lan.
+
+3        IN    PTR   host1.riyadh.lan.
+4        IN    PTR   host2.riyadh.lan.

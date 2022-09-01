@@ -2,3 +2,9 @@ zone "riyadh.lan" {
     type master;
     file "/etc/bind/zones/db.riyadh.lan";
 };
+
+
+zone "0.20.172.in-addr.arpa"{
+    type master;
+    file "/etc/bind/zones/rev.0.20.172.in-addr.arpa";
+};

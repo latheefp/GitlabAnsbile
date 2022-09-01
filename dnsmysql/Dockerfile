@@ -1,4 +1,5 @@
 FROM ubuntu:bionic
+CMD [ "export RUNLEVEL=1 " ]
 
 RUN apt-get update \
   && apt-get install -y \
@@ -7,32 +8,30 @@ RUN apt-get update \
   bind9-doc \
   net-tools \
   dnsutils \
-  vim  
+  mysql-client \
+  vim \
+  pdns-server  
+ # pdns-backend-mysql
 
 # Enable IPv4
 RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
-RUN mkdir /etc/bind/default
 #Enviroments
 ENV DOMAIN=riyadh.lan
-ENV VLAN=
 
 # Copy configuration files
 COPY named.conf.options /etc/bind/
 COPY named.conf.local /etc/bind/
 COPY db.riyadh.lan /etc/bind/zones/
 COPY rev.0.20.172.in-addr.arpa /etc/bind/zones/
-
-COPY rev.def /etc/bind/default/
-COPY named.conf.options /etc/bind/default/
-COPY named.conf.local /etc/bind/default/
-COPY db.def /etc/bind/default/
-
-ADD entrypoint.sh /etc/bind/entrypoint.sh
+ADD domain.sh /etc/bind/domain.sh
+#COPY domain.sh /etc/bind/domain.sh
 
 
 # Run eternal loop
 #CMD ["/bin/bash", "-c", "while :; do sleep 10; done"]
 #CMD ["/bin/bash", "-c", /etc/init.d/bind9 start;  "while :; do sleep 10; done"]
+CMD [ " systemctl disable systemd-resolved " ]
+CMD [ " systemctl stop systemd-resolved " ]
 
 
 # Start bind9 service
@@ -40,6 +39,5 @@ EXPOSE 53
 #CMD ["/etc/init.d/bind9 start"]
 #ENTRYPOINT  ["/bin/bash /etc/init.d/bind9 start"]
 #ENTRYPOINT  service bind9 start && bash
-WORKDIR /etc/bind
-RUN chmod +x /etc/bind/entrypoint.sh
-CMD  /etc/bind/entrypoint.sh;
+CMD  [ "/etc/bind/domain.sh" ]
+CMD  service bind9 start ; while true; do sleep 100; done;
