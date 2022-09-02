@@ -1,10 +1,10 @@
-zone "riyadh.lan" {
+zone "local.lan" {
     type master;
-    file "/etc/bind/zones/db.riyadh.lan";
+    file "/etc/bind/conf/local.lan";
 };
 
 
-zone "0.20.172.in-addr.arpa"{
+zone "rev.local"{
     type master;
-    file "/etc/bind/zones/rev.0.20.172.in-addr.arpa";
+    file "/etc/bind/conf/rev.local";
 };

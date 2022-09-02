@@ -4,7 +4,6 @@ RUN apt-get update \
   && apt-get install -y \
   bind9 \
   bind9utils \
-  bind9-doc \
   net-tools \
   dnsutils \
   vim  
@@ -13,14 +12,14 @@ RUN apt-get update \
 RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
 RUN mkdir /etc/bind/default
 #Enviroments
-ENV DOMAIN=riyadh.lan
-ENV VLAN=
+ENV DOMAIN=local.lan
+#ENV VLAN=
 
 # Copy configuration files
-COPY named.conf.options /etc/bind/
-COPY named.conf.local /etc/bind/
-COPY db.riyadh.lan /etc/bind/zones/
-COPY rev.0.20.172.in-addr.arpa /etc/bind/zones/
+#COPY named.conf.options /etc/bind/
+#COPY named.conf.local /etc/bind/
+#COPY db.riyadh.lan /etc/bind/zones/
+#COPY rev.0.20.172.in-addr.arpa /etc/bind/zones/
 
 COPY rev.def /etc/bind/default/
 COPY named.conf.options /etc/bind/default/

@@ -1,10 +1,10 @@
-zone "riyadh.lan" {
+zone "egrand.in" {
     type master;
-    file "/etc/bind/zones/db.riyadh.lan";
+    file "/etc/bind/conf/egrand.in";
 };
 
 
 zone "0.20.172.in-addr.arpa"{
     type master;
-    file "/etc/bind/zones/rev.0.20.172.in-addr.arpa";
+    file "/etc/bind/conf/0.20.172.in-addr.arpa";
 };

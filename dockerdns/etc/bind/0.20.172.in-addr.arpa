@@ -1,5 +1,5 @@
 $TTL 86400
-@           IN    SOA    riyadh.lan.  root.riyadh.lan. (
+@           IN    SOA    egrand.in.  root.egrand.in. (
           6       ; serial
           28800   ; refresh
           14400   ; retry
@@ -8,7 +8,5 @@ $TTL 86400
           )
 
 @        IN    NS    ns. 
-2        IN    PTR   ns.riyadh.lan.
+2        IN    PTR   ns.egrand.in.
 
-3        IN    PTR   host1.riyadh.lan.
-4        IN    PTR   host2.riyadh.lan.
